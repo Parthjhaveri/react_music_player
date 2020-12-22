@@ -1,9 +1,46 @@
 @import "./components/dashboard/dashboard-styles.scss";
+@import "./components/global/global-widget-styles.scss";
+@import "./components/shell/shell-styles.scss";
 
 $shell_main_bg: #fff;
 
-body {
+html, body {
 	background-color: $shell_main_bg;	
 	margin: 0px;
 	padding: 0px;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  	-webkit-font-smoothing: antialiased;
+  	-moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	margin: 0px;
+	letter-spacing: 1.3px;
+}
+
+h2::after {
+	content: '';
+	width: 100%;
+	height: auto;
+	border: 1px solid #c4b316;
+	display: block;
+	margin-top: 20px;
+	margin-bottom: 30px;
+}
+
+/*FOCUS*/
+*:focus {
+	outline: dashed;
+}
+
+/*-------------------------*/
+/*UTILITY*/
+/*-------------------------*/
+
+/*SECTION BLOCKS*/
+.sec-std {
+	width: auto;
+	height: auto;
+	padding: 60px;
 }

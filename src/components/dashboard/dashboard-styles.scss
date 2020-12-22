@@ -1,5 +1,6 @@
-$background_color: orange;
+$background_color: #ff0342;
 
 #main-dashboard {
-	background-color: $background_color;
+	border: none;
+	border-bottom: 10px solid $background_color;
 }

@@ -5,7 +5,7 @@ import InfoWidget from '../global/info_widget';
 	
 const SongList = () => {
     return (
-    	<aside id='song-list'>
+    	<aside className='sec-std' id='song-list'>
     		<h1>Song List</h1>
             <InfoWidget />
     	</aside>

@@ -6,7 +6,7 @@ import SongList from './components/shell/songlist';
 
 const App = () => {
   return (
-    <div className="App">
+    <div>
       <Dashboard />
       <SongList />
     </div>
