@@ -5,8 +5,7 @@ import ControlsWidget from '../global/controls.js';
 
 const Dashboard = () => {
     return (
-    	<aside className='sec-std' id='main-dashboard'>
-			<h1>Dashboard</h1>
+    	<aside className='sec-std' id='main-dashboard'>			
 			<ControlsWidget />
     	</aside>
     )
