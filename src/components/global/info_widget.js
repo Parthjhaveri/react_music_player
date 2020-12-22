@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 
-const InfoWidget = () => { 
+const InfoWidget = (props) => { 
 
     return (
     	<aside>
-		    <h1>Info Widget</h1>		
+		    <h1>{props.track}</h1>
     	</aside>
     )
 }
