@@ -1,0 +1,9 @@
+@import "./components/dashboard/dashboard-styles.scss";
+
+$shell_main_bg: #fff;
+
+body {
+	background-color: $shell_main_bg;	
+	margin: 0px;
+	padding: 0px;
+}
