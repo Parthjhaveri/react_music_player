@@ -8,8 +8,6 @@ import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import store from './redux/store/index.js';
 
-// console.log(store.getState());
-
 ReactDOM.render(
   	<Provider store={store}>
   		<React.StrictMode>

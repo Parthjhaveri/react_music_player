@@ -24,7 +24,7 @@ const SongList = (props) => {
     			// MAP OVER ALL SONGS FROM COMPONENT STATE AND PASS PROPS INTO PRESENTATIONAL COMPONENT
     			songs.map((el, idx) => {
     				return <InfoWidget 
-    					key={idx}
+    					key={idx}                        
     					{...el}
     				/>
     			})
