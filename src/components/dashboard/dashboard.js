@@ -16,8 +16,8 @@ const Dashboard = (props) => {
 		for (var i = props.previously_played.length - 1; i > 0; i--) {			
 
 			if ((props.current_track.url.localeCompare(props.previously_played[i].url)) === 0) {
-				set_previous_song(props.previously_played[i - 1].url);
-				set_previous_song_name(props.previously_played[i - 1].track);
+				set_previous_song(props.previously_played[props.previously_played.length - 2].url);
+				set_previous_song_name(props.previously_played[props.previously_played.length - 2].track);
 			}
 		}
 		
