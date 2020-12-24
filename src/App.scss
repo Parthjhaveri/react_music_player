@@ -1,6 +1,7 @@
 @import "./components/dashboard/dashboard-styles.scss";
-@import "./components/global/global-widget-styles.scss";
 @import "./components/shell/shell-styles.scss";
+@import "./components/global/info-widget/styles.scss";
+@import "./components/global/controls/styles.scss";
 
 $shell_main_bg: #fff;
 
@@ -43,4 +44,29 @@ h2::after {
 	width: auto;
 	height: auto;
 	padding: 60px;
+}
+
+/*MARGIN*/
+.my-sm {
+	margin: 10px 0px;
+}
+
+.my-md {
+	margin: 20px 0px;
+}
+
+.mt-sm {
+	margin-top: 10px;
+}
+
+.mt-md {
+	margin-top: 20px;
+}
+
+.mb-sm {
+	margin-bottom: 10px;
+}
+
+.mb-md {
+	margin-bottom: 20px;
 }

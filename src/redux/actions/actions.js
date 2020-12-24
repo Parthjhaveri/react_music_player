@@ -1,7 +1,12 @@
-import { PLAYLIST, CURRENT, PREV, NEXT, CURRENT_ELEMENT } from './action_types';
+import { PLAYLIST, PREVIOUSLY_PLAYED, CURRENT, PREV, NEXT, CURRENT_ELEMENT } from './action_types';
 
 export const playlist = data => ({
 	type: PLAYLIST,
+	payload: data
+});
+
+export const previously_played = data => ({
+	type: PREVIOUSLY_PLAYED,
 	payload: data
 });
 

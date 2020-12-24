@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
 // IMPORT COMPONENTS
-import ControlsWidget from '../global/controls.js';
-import InfoWidget from '../global/info_widget.js';
+import ControlsWidget from '../global/controls/controls.js';
+import InfoWidget from '../global/info-widget/info_widget.js';
 
 const Dashboard = (props) => {
     return (

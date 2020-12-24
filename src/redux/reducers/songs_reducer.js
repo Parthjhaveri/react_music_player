@@ -1,7 +1,8 @@
-import { CURRENT, PREV, NEXT, PLAYLIST } from '../actions/action_types';
+import { CURRENT, PREV, NEXT, PLAYLIST, PREVIOUSLY_PLAYED } from '../actions/action_types';
 
 const initial_state = {
 	playlist: [],
+	previously_played: [],
 	current_song: {},
 	prev_song: {},
 	next_song: {},
@@ -13,6 +14,12 @@ export default function songs_reducer (state = initial_state, action) {
 			return {
 				...state,
 				playlist: action.payload
+			}
+
+		case PREVIOUSLY_PLAYED:
+			return {
+				...state,
+				previously_played: [...state.previously_played, action.payload]
 			}
 
 		case CURRENT:
