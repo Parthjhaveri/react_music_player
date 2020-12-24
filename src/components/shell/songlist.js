@@ -4,7 +4,7 @@ import { playlist, current, prev, next, current_element } from '../../redux/acti
 
 // IMPORT WIDGETS AND PLAYLIST
 import song_playlist from '../../data/playlist.js';
-import InfoWidget from '../global/info-widget/info_widget';
+import InfoWidget from '../global/info-widget/info_widget.js';
 	
 const SongList = (props) => {
 
