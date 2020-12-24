@@ -17,7 +17,7 @@ const InfoWidget = (props) => {
 
     return (
     	<aside className='my-md song-item' onClick={current_song}>
-		    { props.artist ? <h1>{props.artist + ' - ' + props.track}</h1> : <h1>{props.track_name.track}</h1> }
+		    { props.artist ? <h1>{props.artist + ' - ' + props.track}</h1> : <h1>{props.track_name}</h1> }
 		    { props.album ? <p>{props.album}</p> : null }
     	</aside>
     )
