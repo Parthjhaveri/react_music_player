@@ -13,6 +13,7 @@ const ControlsWidget = (props) => {
 			    showSkipControls={true}
 			    showJumpControls={false}
 			    onClickPrevious={props.show_previous}
+			    onClickNext={props.show_next}
 			/>		
     	</aside>
     )
