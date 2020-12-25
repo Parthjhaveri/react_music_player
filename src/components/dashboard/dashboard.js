@@ -10,61 +10,41 @@ const Dashboard = (props) => {
 
 	const [playing_track, set_playing_track] = useState({}); // CURRENTLY PLAYING SONG
 	
-	const [previous_song_name, set_previous_song_name] = useState('');
-	const [previous_song, set_previous_song] = useState('');
-
-	let [counter, set_counter] = useState(1);
-
 	// ON CURRENT TRACK UPDATE, SET THE CURRENTLY PLAYING TRACK DATA TO STATE, KEEPING IT GENERIC
 	useEffect(() => {		
-		set_playing_track({track: props.current_track.track, url: props.current_track.url});
-		console.log('CURRENT TRACK', props.current_track);
+		set_playing_track({track: props.current_track.track, url: props.current_track.url});		
 	}, [props.current_track]);
-
-	// WHEN THE 'PREV' BUTTON IS CLICKED, SET THE PREVIOUS SONG DATA = TO THE 
-	// CURRENTLY PLAYING SONG DATA, SO WE CAN USE THE GENERIC STATE VARIABLE TO PASS IN AS PROPS TO
-	// OUR CHILD COMPONENTS, ONE OF WHICH IS SOLELY PRESENTATIONAL (CONTROLS WIDGET)
-	useEffect(() => {				
-		set_playing_track({track: previous_song_name, url: previous_song});
-	}, [previous_song]);
 
 	// SHOW PREVIOUS SONG
 	const show_previous = () => {	
-		console.log('CURRENT TRACK (PREV BTN)', props.current_track);
+		console.log('PREVIOUSLY PLAYED', props.previously_played_songs);
 
-		counter++;
-		set_counter(counter);
-		
-		let prev_url = props.previously_played_songs[props.previously_played_songs.length - (counter)].url;
-		let prev_track = props.previously_played_songs[props.previously_played_songs.length - (counter)].track
+		for (var i = props.previously_played_songs.length - 1; i >= 0; i--) {			
 
-		console.log('PREVIOUS SONG ', prev_url, prev_track);
+			// PUSH IN PREVIOUSLY PLAYED LOG
+			props.previously_played(props.previously_played_songs[i]);
 
-		set_playing_track({track: prev_track, url: prev_url});
-
-		// SET CURRENT
-		props.current(props.previously_played_songs[props.previously_played_songs.length - (counter)]);
-		
+			// SET AS CURRENTLY PLAYING GENERIC STATE VARIABLE
+			set_playing_track({track: props.previously_played_songs[i].track, url: props.previously_played_songs[i].url});
+		}
 	}
 
 	// SHOW NEXT SONG
-	const show_next = () => {		
-
+	const show_next = () => {				
 		// LOOP OVER PLAYLIST AND SET NEXT SONG
 		for (let i = 0; i < props.all_songs.length; i++) {			
-			if ((props.current_track.url.localeCompare(props.all_songs[i].url)) === 0) {				
+			if (((props.current_track.url.localeCompare(props.all_songs[i].url)) === 0)) {				
 				
 				// SET AS CURRENT IN REDUX STORE
 				props.current(props.all_songs[i + 1]);				
 
 				// PUSH IN PREVIOUSLY PLAYED LOG
-				props.previously_played(props.all_songs[i + 1]);				
+				props.previously_played(props.current_track);
 
 				// SET AS CURRENTLY PLAYING GENERIC STATE VARIABLE
-				set_playing_track({track: props.all_songs[i + 1].track, url: props.all_songs[i + 1].url});	
+				set_playing_track({track: props.all_songs[i + 1].track, url: props.all_songs[i + 1].url});
 			}
 		}
-
 	}
 
     return (

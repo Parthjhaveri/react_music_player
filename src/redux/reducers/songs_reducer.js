@@ -1,4 +1,5 @@
 import { CURRENT, PREV, NEXT, PLAYLIST, PREVIOUSLY_PLAYED } from '../actions/action_types';
+import { map, tail, times, uniq } from 'lodash';
 
 const initial_state = {
 	playlist: [],
@@ -6,6 +7,18 @@ const initial_state = {
 	current_song: {},
 	prev_song: {},
 	next_song: {},
+}
+
+const check_previously_log = (state, action) => {
+	let _state  = state;
+	let _action = action;
+
+	let index = _state.map((item) => item.url).indexOf(_action.url);
+	
+	if (index > -1) {
+		_state.splice(index, 1, _action);
+		return _state;
+	}
 }
 
 export default function songs_reducer (state = initial_state, action) {
@@ -19,7 +32,7 @@ export default function songs_reducer (state = initial_state, action) {
 		case PREVIOUSLY_PLAYED:
 			return {
 				...state,
-				previously_played: [...state.previously_played, action.payload]
+				previously_played: check_previously_log([...state.previously_played, action.payload], action.payload)//[...state.previously_played, action.payload]
 			}
 
 		case CURRENT:
