@@ -15,36 +15,21 @@ const Dashboard = (props) => {
 		set_playing_track({track: props.current_track.track, url: props.current_track.url});		
 	}, [props.current_track]);
 
+	useEffect(() => {		
+		console.log(props.previously_played_songs);
+	}, [props.previously_played_songs]);
+
 	// SHOW PREVIOUS SONG
-	const show_previous = () => {	
-		console.log('PREVIOUSLY PLAYED', props.previously_played_songs);
-
-		for (var i = props.previously_played_songs.length - 1; i >= 0; i--) {			
-
-			// PUSH IN PREVIOUSLY PLAYED LOG
-			props.previously_played(props.previously_played_songs[i]);
-
-			// SET AS CURRENTLY PLAYING GENERIC STATE VARIABLE
-			set_playing_track({track: props.previously_played_songs[i].track, url: props.previously_played_songs[i].url});
+	const show_previous = () => {
+		// If the current song is not in history array, push it
+		for (var i = props.previously_played_songs.length - 1; i > 0; i--) {	
+			props.previously_played(playing_track);
 		}
 	}
 
 	// SHOW NEXT SONG
 	const show_next = () => {				
-		// LOOP OVER PLAYLIST AND SET NEXT SONG
-		for (let i = 0; i < props.all_songs.length; i++) {			
-			if (((props.current_track.url.localeCompare(props.all_songs[i].url)) === 0)) {				
-				
-				// SET AS CURRENT IN REDUX STORE
-				props.current(props.all_songs[i + 1]);				
-
-				// PUSH IN PREVIOUSLY PLAYED LOG
-				props.previously_played(props.current_track);
-
-				// SET AS CURRENTLY PLAYING GENERIC STATE VARIABLE
-				set_playing_track({track: props.all_songs[i + 1].track, url: props.all_songs[i + 1].url});
-			}
-		}
+		console.log(props);
 	}
 
     return (

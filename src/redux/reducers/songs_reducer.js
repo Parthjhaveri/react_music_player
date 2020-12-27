@@ -1,5 +1,6 @@
 import { CURRENT, PREV, NEXT, PLAYLIST, PREVIOUSLY_PLAYED } from '../actions/action_types';
-import { map, tail, times, uniq } from 'lodash';
+// import { map, tail, times, uniq } from 'lodash';
+const _ = require('lodash');
 
 const initial_state = {
 	playlist: [],
@@ -13,12 +14,20 @@ const check_previously_log = (state, action) => {
 	let _state  = state;
 	let _action = action;
 
-	let index = _state.map((item) => item.url).indexOf(_action.url);
+	// If the current song is not in history array, push it
+	if (_.some(_state, _action) === false) {
+		_state.push(_action);
+		return _state;
+	} 
 	
-	if (index > -1) {
-		_state.splice(index, 1, _action);
+	// Else if the current song is in history array, erase it, then push it
+	else if (_.some(_state, _action) === true) {
+		_.remove(_state, _action);
+		_state.push(_action);
 		return _state;
 	}
+
+	console.log('STATE FROM REDUCER', _state);
 }
 
 export default function songs_reducer (state = initial_state, action) {
@@ -32,7 +41,7 @@ export default function songs_reducer (state = initial_state, action) {
 		case PREVIOUSLY_PLAYED:
 			return {
 				...state,
-				previously_played: check_previously_log([...state.previously_played, action.payload], action.payload)//[...state.previously_played, action.payload]
+				previously_played: check_previously_log(state.previously_played, action.payload)//[...state.previously_played, action.payload])
 			}
 
 		case CURRENT:
