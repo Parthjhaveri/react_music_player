@@ -17,14 +17,14 @@ const check_previously_log = (state, action) => {
 	// If the current song is not in history array, push it
 	if (_.some(_state, _action) === false) {
 		_state.push(_action);
-		return _state;
+		return [..._state];
 	} 
 	
 	// Else if the current song is in history array, erase it, then push it
 	else if (_.some(_state, _action) === true) {
 		_.remove(_state, _action);
 		_state.push(_action);
-		return _state;
+		return [..._state];
 	}
 
 	console.log('STATE FROM REDUCER', _state);

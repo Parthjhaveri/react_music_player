@@ -21,15 +21,32 @@ const Dashboard = (props) => {
 
 	// SHOW PREVIOUS SONG
 	const show_previous = () => {
+		
 		// If the current song is not in history array, push it
 		for (var i = props.previously_played_songs.length - 1; i > 0; i--) {	
 			props.previously_played(playing_track);
 		}
+		
+		set_playing_track({track: props.previously_played_songs[props.previously_played_songs.length - 2].track, url: props.previously_played_songs[props.previously_played_songs.length - 2].url});
+
 	}
 
 	// SHOW NEXT SONG
 	const show_next = () => {				
-		console.log(props);
+		// LOOP OVER PLAYLIST AND SET NEXT SONG
+		for (let i = 0; i < props.all_songs.length; i++) {			
+			if (((playing_track.url.localeCompare(props.all_songs[i].url)) === 0)) {				
+				
+				// SET AS CURRENT IN REDUX STORE
+				props.current(props.all_songs[i + 1]);				
+
+				// PUSH IN PREVIOUSLY PLAYED LOG
+				props.previously_played(props.all_songs[i + 1]);				
+
+				// SET AS CURRENTLY PLAYING GENERIC STATE VARIABLE
+				set_playing_track({track: props.all_songs[i + 1].track, url: props.all_songs[i + 1].url});					
+			}
+		}
 	}
 
     return (
