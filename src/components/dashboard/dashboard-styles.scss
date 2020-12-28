@@ -1,6 +1,25 @@
-$background_color: #ff0342;
+$background_color: #f0b51f;
+
+// AUDIO PLAYER
+$rhap_theme-color: #212029 !default;   // Color of all buttons and volume/progress indicators 
+$rhap_background-color: #fff !default; // Color of the player background 
+$rhap_bar-color: #f0b51f !default;     // Color of volume and progress bar 
+$rhap_time-color: #f0b51f !default;       // Font color of current time and duration 
+$rhap_font-family: inherit !default; 
 
 #main-dashboard {
-	border: none;
-	border-bottom: 10px solid $background_color;
+	background-color: $background_color;
+	transition: .5s;
+}
+
+#main-dashboard aside .rhap_container {
+	border-radius: 5px;
+	overflow: hidden;
+	border: none;	
+	background-color: $rhap_theme-color;
+	margin-bottom: 20px;
+}
+
+#main-dashboard aside .rhap_main #rhap_current-time, #main-dashboard aside .rhap_main .rhap_time.rhap_total-time {
+	color: $rhap_time-color;
 }

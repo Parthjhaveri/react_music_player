@@ -9,13 +9,11 @@ html, body {
 	background-color: $shell_main_bg;	
 	margin: 0px;
 	padding: 0px;
-	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-  	-webkit-font-smoothing: antialiased;
-  	-moz-osx-font-smoothing: grayscale;
+	font-family: 'Doppio One', sans-serif;
+	text-transform: uppercase;
 }
 
-h1, h2, h3, h4, h5, h6 {
+* {
 	margin: 0px;
 	letter-spacing: 1.3px;
 }

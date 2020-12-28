@@ -18,8 +18,7 @@ const SongList = (props) => {
 	}, [props]);
 
     return (
-    	<aside className='sec-std' id='song-list'>
-    		<h1>Song List</h1>
+    	<aside className='sec-std' id='song-list'>    		
     		{	
     			// MAP OVER ALL SONGS FROM COMPONENT STATE AND PASS PROPS INTO PRESENTATIONAL COMPONENT
     			songs.map((el, idx) => {

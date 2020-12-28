@@ -15,12 +15,15 @@ const Dashboard = (props) => {
 
 	const [is_checked, set_is_checked] = useState(); // SHUFFLE CHECK
 
-	// CHECKBOX
-	const shuffle_cb = useRef(null);
+	const [bg_image, set_bg_image] = useState('');
+
+	// REFS
+	const shuffle_cb = useRef(null); // CHECKBOX
+	const main_dash = useRef(null); // DASHBOARD ELEMENT
 	
 	// ON CURRENT TRACK UPDATE, SET THE CURRENTLY PLAYING TRACK DATA TO STATE, KEEPING IT GENERIC
 	useEffect(() => {		
-		set_playing_track({track: props.current_track.track, url: props.current_track.url});		
+		set_playing_track({track: props.current_track.track, url: props.current_track.url});			
 	}, [props.current_track]);
 
 	useEffect(() => {		
@@ -64,7 +67,8 @@ const Dashboard = (props) => {
 	}
 
 	// SHOW NEXT SONG
-	const show_next = () => {
+	const show_next = () => { 
+
 		// INDEX OF THE CURRENTLY PLAYING SONG IN THE ALL SONGS ARRAY			
 		let index_of_current = props.all_songs.findIndex(x => x.url === playing_track.url);				
 		
@@ -123,9 +127,13 @@ const Dashboard = (props) => {
 	}
 
     return (
-    	<aside className='sec-std' id='main-dashboard'>			
+    	<aside className='sec-std' id='main-dashboard' ref={main_dash}>			
 			<InfoWidget track_name={playing_track.track}/>
-			<ControlsWidget url={playing_track.url} show_previous={show_previous} show_next={show_next} />
+			{
+				props.previously_played_songs.length > 0 ? 
+				<ControlsWidget url={playing_track.url} show_previous={show_previous} show_next={show_next} /> :
+				<h1>Select a Song from below...</h1>
+			}			
 			<h3>Shuffle <input onChange={on_shuffle} ref={shuffle_cb} type='checkbox' id='shuffle_checkbox' name='song_shuffle' value='Shuffle'/></h3>
     	</aside>
     )

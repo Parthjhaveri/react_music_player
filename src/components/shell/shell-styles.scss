@@ -1,0 +1,18 @@
+$background_color: #212029;
+$font_color: #f2f2f0;
+$font_hover_color: #f0b51f;
+$font_active_color: #f0b51f;
+
+#song-list {
+	background-color: $background_color;
+	color: $font_color;
+}
+
+#song-list aside.song-item *:hover {
+	color: $font_hover_color;
+}
+
+.song_active {
+	border: 1px solid $font_active_color;
+}
+
