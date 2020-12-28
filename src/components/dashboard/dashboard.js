@@ -23,10 +23,6 @@ const Dashboard = (props) => {
 		set_playing_track({track: props.current_track.track, url: props.current_track.url});		
 	}, [props.current_track]);
 
-	useEffect(() => {		
-		// console.log(props.previously_played_songs);
-	}, [props.previously_played_songs]);
-
 	// SHOW PREVIOUS SONG
 	const show_previous = () => {
 
@@ -68,13 +64,37 @@ const Dashboard = (props) => {
 		if (index_of_current === (props.all_songs.length - 1)) {
 			// PLAY THE FIRST SONG IN THE PLAYLIST
 			set_playing_track({track: props.all_songs[0].track, url: props.all_songs[0].url});
+
+			// IF SHUFFLE ON
+			if (is_checked) {
+				console.log(true);
+				
+				// SELECT RANDOMIZED ELEMENT THAT WAS NOT PREVIOUSLY PLAYED
+				let random_url = randoSequence(props.all_songs)[0].value.url;
+				let random_track = randoSequence(props.all_songs)[0].value.track;
+
+				// ... SET URL AND TRACK
+				set_playing_track({track: random_track, url: random_url});
+			}		
 		}
 
 		else {
 			// LOOP OVER PLAYLIST AND SET NEXT SONG
-			for (let i = 0; i < props.all_songs.length; i++) {					
+			for (let i = 0; i < props.all_songs.length; i++) {	
 
-				if (((playing_track.url.localeCompare(props.all_songs[i].url)) === 0)) {				
+				// IF SHUFFLE ON
+				if (is_checked) {
+					console.log(true);
+					
+					// SELECT RANDOMIZED ELEMENT THAT WAS NOT PREVIOUSLY PLAYED
+					let random_url = randoSequence(props.all_songs)[0].value.url;
+					let random_track = randoSequence(props.all_songs)[0].value.track;
+
+					// ... SET URL AND TRACK
+					set_playing_track({track: random_track, url: random_url});
+				}				
+
+				else if (((playing_track.url.localeCompare(props.all_songs[i].url)) === 0)) {
 					
 					// SET AS CURRENT IN REDUX STORE
 					props.current(props.all_songs[i + 1]);				
@@ -86,23 +106,13 @@ const Dashboard = (props) => {
 					set_playing_track({track: props.all_songs[i + 1].track, url: props.all_songs[i + 1].url});					
 				}
 			}
-		}
 
-		// IF SHUFFLE ON
-		if (is_checked) {
-
-			// SELECT RANDOMIZED ELEMENT THAT WAS NOT PREVIOUSLY PLAYED
-			let random_url = randoSequence(props.all_songs)[0].value.url;
-			let random_track = randoSequence(props.all_songs)[0].value.track;
-
-			// ... SET URL AND TRACK
-			set_playing_track({track: random_track, url: random_url});
-		}
+		}		
 
 	}
 
 	// ON SHUFFLE
-	const on_shuffle = (e) => {
+	const on_shuffle = (e) => {		
 		set_is_checked(e.target.checked);
 	}
 
