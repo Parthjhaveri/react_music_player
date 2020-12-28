@@ -7,6 +7,7 @@ import ControlsWidget from '../global/controls/controls.js';
 import InfoWidget from '../global/info-widget/info_widget.js';
 
 const Dashboard = (props) => {
+	const _ = require('lodash');
 
 	const [playing_track, set_playing_track] = useState({}); // CURRENTLY PLAYING SONG
 	
@@ -24,20 +25,29 @@ const Dashboard = (props) => {
 
 		// IF THERE IS ONLY ONE SONG IN PREVIOUSLY PLAYED ARRAY
 		if (props.previously_played_songs.length === 1) {			
-			// GRAB THE INDEX OF THE CURRENTLY PLAYING SONG IN THE ALL SONGS ARRAY
-			for (var i = 0; i < props.all_songs.length; i++) {				
-				if (((playing_track.url.localeCompare(props.all_songs[i].url)) === 0)) {					
-					set_playing_track({track: props.all_songs[props.all_songs[i - 1]].track, url: props.all_songs[props.all_songs[i - 1]].url});
-				}
+			
+			// INDEX OF THE CURRENTLY PLAYING SONG IN THE ALL SONGS ARRAY			
+			let index_of_current = props.all_songs.findIndex(x => x.url === playing_track.url);
+			console.log('INDEX OF CURRENTLY PLAYING SONG IN THE ALL SONGS ARRAY = ', index_of_current);
+
+			if (index_of_current === 0) {
+				// DISABLE BUTTON
+				document.querySelectorAll('.rhap_main-controls button[aria-label="Previous"]')[0].disabled = true;
 			}
+			else if (index_of_current > 0) {				
+				set_playing_track({track: props.all_songs[index_of_current - 1].track, url: props.all_songs[index_of_current - 1].url});
+			}
+
 		}
 		
-		// If the current song is not in history array, push it
-		for (var i = props.previously_played_songs.length - 1; i > 0; i--) {	
-			props.previously_played(playing_track);
+		else {
+			// If the current song is not in history array, push it
+			for (var i = props.previously_played_songs.length - 1; i > 0; i--) {	
+				props.previously_played(playing_track);
+			}
+			
+			set_playing_track({track: props.previously_played_songs[props.previously_played_songs.length - 2].track, url: props.previously_played_songs[props.previously_played_songs.length - 2].url});
 		}
-		
-		set_playing_track({track: props.previously_played_songs[props.previously_played_songs.length - 2].track, url: props.previously_played_songs[props.previously_played_songs.length - 2].url});
 
 	}
 

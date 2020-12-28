@@ -1,5 +1,4 @@
 import { CURRENT, PREV, NEXT, PLAYLIST, PREVIOUSLY_PLAYED } from '../actions/action_types';
-// import { map, tail, times, uniq } from 'lodash';
 const _ = require('lodash');
 
 const initial_state = {
