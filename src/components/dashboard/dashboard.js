@@ -23,8 +23,16 @@ const Dashboard = (props) => {
 		set_playing_track({track: props.current_track.track, url: props.current_track.url});		
 	}, [props.current_track]);
 
+	useEffect(() => {		
+		if (props.previously_played_songs.length === 0) {
+			shuffle_cb.current.disabled = true;
+		} else {
+			shuffle_cb.current.disabled = false;
+		}
+	}, [props.previously_played_songs]);
+
 	// SHOW PREVIOUS SONG
-	const show_previous = () => {
+	const show_previous = () => {		
 
 		// IF THERE IS ONLY ONE SONG IN PREVIOUSLY PLAYED ARRAY
 		if (props.previously_played_songs.length === 1) {			
@@ -66,9 +74,7 @@ const Dashboard = (props) => {
 			set_playing_track({track: props.all_songs[0].track, url: props.all_songs[0].url});
 
 			// IF SHUFFLE ON
-			if (is_checked) {
-				console.log(true);
-				
+			if (is_checked) {								
 				// SELECT RANDOMIZED ELEMENT THAT WAS NOT PREVIOUSLY PLAYED
 				let random_url = randoSequence(props.all_songs)[0].value.url;
 				let random_track = randoSequence(props.all_songs)[0].value.track;
