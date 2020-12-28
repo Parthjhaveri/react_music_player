@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import { playlist, previously_played, current, prev, next, current_element } from '../../redux/actions/actions';
 
@@ -7,9 +7,16 @@ import ControlsWidget from '../global/controls/controls.js';
 import InfoWidget from '../global/info-widget/info_widget.js';
 
 const Dashboard = (props) => {
+	// LIBRARIES
 	const _ = require('lodash');
+	const {rando, randoSequence} = require('@nastyox/rando.js');
 
 	const [playing_track, set_playing_track] = useState({}); // CURRENTLY PLAYING SONG
+
+	const [is_checked, set_is_checked] = useState(); // SHUFFLE CHECK
+
+	// CHECKBOX
+	const shuffle_cb = useRef(null);
 	
 	// ON CURRENT TRACK UPDATE, SET THE CURRENTLY PLAYING TRACK DATA TO STATE, KEEPING IT GENERIC
 	useEffect(() => {		
@@ -81,12 +88,29 @@ const Dashboard = (props) => {
 			}
 		}
 
+		// IF SHUFFLE ON
+		if (is_checked) {
+
+			// SELECT RANDOMIZED ELEMENT THAT WAS NOT PREVIOUSLY PLAYED
+			let random_url = randoSequence(props.all_songs)[0].value.url;
+			let random_track = randoSequence(props.all_songs)[0].value.track;
+
+			// ... SET URL AND TRACK
+			set_playing_track({track: random_track, url: random_url});
+		}
+
+	}
+
+	// ON SHUFFLE
+	const on_shuffle = (e) => {
+		set_is_checked(e.target.checked);
 	}
 
     return (
     	<aside className='sec-std' id='main-dashboard'>			
 			<InfoWidget track_name={playing_track.track}/>
 			<ControlsWidget url={playing_track.url} show_previous={show_previous} show_next={show_next} />
+			<h3>Shuffle <input onChange={on_shuffle} ref={shuffle_cb} type='checkbox' id='shuffle_checkbox' name='song_shuffle' value='Shuffle'/></h3>
     	</aside>
     )
 }
