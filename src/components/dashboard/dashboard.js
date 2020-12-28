@@ -31,8 +31,8 @@ const Dashboard = (props) => {
 			console.log('INDEX OF CURRENTLY PLAYING SONG IN THE ALL SONGS ARRAY = ', index_of_current);
 
 			if (index_of_current === 0) {
-				// DISABLE BUTTON
-				document.querySelectorAll('.rhap_main-controls button[aria-label="Previous"]')[0].disabled = true;
+				// PLAY THE LAST SONG IN THE PLAYLIST
+				set_playing_track({track: props.all_songs[props.all_songs.length - 1].track, url: props.all_songs[props.all_songs.length - 1].url});
 			}
 			else if (index_of_current > 0) {				
 				set_playing_track({track: props.all_songs[index_of_current - 1].track, url: props.all_songs[index_of_current - 1].url});
@@ -52,7 +52,11 @@ const Dashboard = (props) => {
 	}
 
 	// SHOW NEXT SONG
-	const show_next = () => {				
+	const show_next = () => {
+		// INDEX OF THE CURRENTLY PLAYING SONG IN THE ALL SONGS ARRAY			
+		let index_of_current = props.all_songs.findIndex(x => x.url === playing_track.url);				
+		console.log('INDEX OF CURRENT', index_of_current);
+
 		// LOOP OVER PLAYLIST AND SET NEXT SONG
 		for (let i = 0; i < props.all_songs.length; i++) {			
 			if (((playing_track.url.localeCompare(props.all_songs[i].url)) === 0)) {				
@@ -67,6 +71,12 @@ const Dashboard = (props) => {
 				set_playing_track({track: props.all_songs[i + 1].track, url: props.all_songs[i + 1].url});					
 			}
 		}
+
+		// IF CURRENT SONG IS THE LAST SONG PLAYING...					
+		// if (index_of_current === props.all_songs.length) {
+		// 	// PLAY THE FIRST SONG IN THE PLAYLIST
+		// 	set_playing_track({track: props.all_songs[0].track, url: props.all_songs[0].url});
+		// }
 	}
 
     return (
