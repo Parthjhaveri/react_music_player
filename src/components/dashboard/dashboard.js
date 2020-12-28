@@ -55,28 +55,31 @@ const Dashboard = (props) => {
 	const show_next = () => {
 		// INDEX OF THE CURRENTLY PLAYING SONG IN THE ALL SONGS ARRAY			
 		let index_of_current = props.all_songs.findIndex(x => x.url === playing_track.url);				
-		console.log('INDEX OF CURRENT', index_of_current);
+		
+		// IF CURRENT SONG IS THE LAST SONG PLAYING...					
+		if (index_of_current === (props.all_songs.length - 1)) {
+			// PLAY THE FIRST SONG IN THE PLAYLIST
+			set_playing_track({track: props.all_songs[0].track, url: props.all_songs[0].url});
+		}
 
-		// LOOP OVER PLAYLIST AND SET NEXT SONG
-		for (let i = 0; i < props.all_songs.length; i++) {			
-			if (((playing_track.url.localeCompare(props.all_songs[i].url)) === 0)) {				
-				
-				// SET AS CURRENT IN REDUX STORE
-				props.current(props.all_songs[i + 1]);				
+		else {
+			// LOOP OVER PLAYLIST AND SET NEXT SONG
+			for (let i = 0; i < props.all_songs.length; i++) {					
 
-				// PUSH IN PREVIOUSLY PLAYED LOG
-				props.previously_played(props.all_songs[i + 1]);				
+				if (((playing_track.url.localeCompare(props.all_songs[i].url)) === 0)) {				
+					
+					// SET AS CURRENT IN REDUX STORE
+					props.current(props.all_songs[i + 1]);				
 
-				// SET AS CURRENTLY PLAYING GENERIC STATE VARIABLE
-				set_playing_track({track: props.all_songs[i + 1].track, url: props.all_songs[i + 1].url});					
+					// PUSH IN PREVIOUSLY PLAYED LOG
+					props.previously_played(props.all_songs[i + 1]);				
+
+					// SET AS CURRENTLY PLAYING GENERIC STATE VARIABLE
+					set_playing_track({track: props.all_songs[i + 1].track, url: props.all_songs[i + 1].url});					
+				}
 			}
 		}
 
-		// IF CURRENT SONG IS THE LAST SONG PLAYING...					
-		// if (index_of_current === props.all_songs.length) {
-		// 	// PLAY THE FIRST SONG IN THE PLAYLIST
-		// 	set_playing_track({track: props.all_songs[0].track, url: props.all_songs[0].url});
-		// }
 	}
 
     return (
