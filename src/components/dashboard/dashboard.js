@@ -27,8 +27,7 @@ const Dashboard = (props) => {
 		if (props.previously_played_songs.length === 1) {			
 			
 			// INDEX OF THE CURRENTLY PLAYING SONG IN THE ALL SONGS ARRAY			
-			let index_of_current = props.all_songs.findIndex(x => x.url === playing_track.url);
-			console.log('INDEX OF CURRENTLY PLAYING SONG IN THE ALL SONGS ARRAY = ', index_of_current);
+			let index_of_current = props.all_songs.findIndex(x => x.url === playing_track.url);			
 
 			if (index_of_current === 0) {
 				// PLAY THE LAST SONG IN THE PLAYLIST
@@ -41,6 +40,8 @@ const Dashboard = (props) => {
 		}
 		
 		else {
+			console.log('PREVIOUSLY PLAYED', props.previously_played_songs);
+
 			// If the current song is not in history array, push it
 			for (var i = props.previously_played_songs.length - 1; i > 0; i--) {	
 				props.previously_played(playing_track);

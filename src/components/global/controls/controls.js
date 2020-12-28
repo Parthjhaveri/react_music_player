@@ -9,6 +9,7 @@ const ControlsWidget = (props) => {
     	<aside>
 		    <AudioPlayer
 			    autoPlay
+			    autoPlayAfterSrcChange={true}
 			    src={props.url}
 			    showSkipControls={true}
 			    showJumpControls={false}
