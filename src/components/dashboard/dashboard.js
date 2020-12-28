@@ -16,11 +16,21 @@ const Dashboard = (props) => {
 	}, [props.current_track]);
 
 	useEffect(() => {		
-		console.log(props.previously_played_songs);
+		// console.log(props.previously_played_songs);
 	}, [props.previously_played_songs]);
 
 	// SHOW PREVIOUS SONG
 	const show_previous = () => {
+
+		// IF THERE IS ONLY ONE SONG IN PREVIOUSLY PLAYED ARRAY
+		if (props.previously_played_songs.length === 1) {			
+			// GRAB THE INDEX OF THE CURRENTLY PLAYING SONG IN THE ALL SONGS ARRAY
+			for (var i = 0; i < props.all_songs.length; i++) {				
+				if (((playing_track.url.localeCompare(props.all_songs[i].url)) === 0)) {					
+					set_playing_track({track: props.all_songs[props.all_songs[i - 1]].track, url: props.all_songs[props.all_songs[i - 1]].url});
+				}
+			}
+		}
 		
 		// If the current song is not in history array, push it
 		for (var i = props.previously_played_songs.length - 1; i > 0; i--) {	
