@@ -24,7 +24,7 @@ const SongList = (props) => {
     			songs.map((el, idx) => {
     				return <InfoWidget 
     					key={idx}                        
-    					{...el}
+    					{...el}                
     				/>
     			})
     		}            
